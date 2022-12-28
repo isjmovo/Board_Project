@@ -1,9 +1,6 @@
 package com.isjmovo.exam.textboard;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -11,7 +8,6 @@ import java.util.Scanner;
 public class App {
   public void run() {
     Scanner sc = Cantainer.scanner;
-    List<Article> articles = new ArrayList<>();
     int articleLastid = 0;
 
     while (true) {
@@ -26,8 +22,6 @@ public class App {
 
         System.out.printf("내용: ");
         String body = sc.nextLine();
-
-        int id = ++articleLastid;
 
         Connection conn = null;
         PreparedStatement pstat = null;
@@ -47,8 +41,6 @@ public class App {
 
           pstat = conn.prepareStatement(sql);
           int affectedRows = pstat.executeUpdate();
-
-          System.out.println("affectedRows : " + affectedRows);
         } catch (ClassNotFoundException e) {
           System.out.println("드라이버 로딩 실패");
         } catch (SQLException e) {
@@ -69,15 +61,68 @@ public class App {
             e.printStackTrace();
           }
         }
-
-        Article article = new Article(id, title, body);
-        articles.add(article);
-
-        System.out.println("생성된 게시물 객체: " + article);
-        System.out.printf("%d번 게시물을 생성하였습니다.\n", id);
       }
 
       else if (cmd.equals("article list")) {
+        Connection conn = null;
+        PreparedStatement pstat = null;
+        ResultSet rs = null;
+
+        List<Article> articles = new ArrayList<>();
+
+        try {
+          Class.forName("com.mysql.jdbc.Driver");
+
+          String url = "jdbc:mysql://127.0.0.1:3306/text_board?useUnicode=true&characterEncoding=utf8&autoReconnect=true&serverTimezone=Asia/Seoul&useOldAliasMetadataBehavior=true&zeroDateTimeNehavior=convertToNull";
+
+          conn = DriverManager.getConnection(url, "isjmovo", "Kim123");
+
+          String sql = "SELECT * ";
+          sql += "FROM article ";
+          sql += "ORDER BY id DESC;";
+
+          pstat = conn.prepareStatement(sql);
+          rs = pstat.executeQuery(sql);
+
+          while (rs.next()) {
+            int id = rs.getInt("id");
+
+            String regDate = rs.getString("regDate");
+            String updateDate = rs.getString("updateDate");
+            String title = rs.getString("title");
+            String body = rs.getString("body");
+
+            Article article = new Article(id, regDate, updateDate, title, body);
+            articles.add(article);
+          }
+        } catch (ClassNotFoundException e) {
+          System.out.println("드라이버 로딩 실패");
+        } catch (SQLException e) {
+          System.out.println("에러: " + e);
+        } finally {
+          try {
+            if (rs != null && !rs.isClosed()) {
+              rs.close();
+            }
+          } catch (SQLException e) {
+            e.printStackTrace();
+          }
+          try {
+            if (pstat != null && !pstat.isClosed()) {
+              pstat.close();
+            }
+          } catch (SQLException e) {
+            e.printStackTrace();
+          }
+          try {
+            if (conn != null && !conn.isClosed()) {
+              conn.close();
+            }
+          } catch (SQLException e) {
+            e.printStackTrace();
+          }
+        }
+
         if (articles.isEmpty()) {
           System.out.println("게시물이 존재하지 않습니다.");
           continue;
