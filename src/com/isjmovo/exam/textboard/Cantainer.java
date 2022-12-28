@@ -1,3 +1,5 @@
+package com.isjmovo.exam.textboard;
+
 import java.util.Scanner;
 
 public class Cantainer {
