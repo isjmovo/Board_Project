@@ -45,3 +45,8 @@ updateDate = NOW(),
 loginId = CONCAT('user', RAND()),
 loginPw = CONCAT('user', RAND()),
 `name` = CONCAT('name', RAND());
+
+# 아이디 존재 여부 확인
+SELECT COUNT(*) > 0
+FROM `member`
+WHERE loginId = loginId;
