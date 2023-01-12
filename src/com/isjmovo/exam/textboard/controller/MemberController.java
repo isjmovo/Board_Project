@@ -3,21 +3,7 @@ package com.isjmovo.exam.textboard.controller;
 import com.isjmovo.exam.textboard.util.DBUtil;
 import com.isjmovo.exam.textboard.util.SecSql;
 
-import java.sql.Connection;
-import java.util.Scanner;
-
-public class MemberController {
-  private Connection conn;
-  private Scanner sc;
-
-  public void setConn(Connection conn) {
-    this.conn = conn;
-  }
-
-  public void setScanner(Scanner Scanner) {
-    this.sc = Scanner;
-  }
-
+public class MemberController extends Controller {
   public void join(String cmd) {
     String loginId;
     String loginPw;
