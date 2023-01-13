@@ -1,0 +1,38 @@
+package com.isjmovo.exam.textboard.dao;
+
+import com.isjmovo.exam.textboard.controller.Controller;
+import com.isjmovo.exam.textboard.util.DBUtil;
+import com.isjmovo.exam.textboard.util.SecSql;
+
+import java.sql.Connection;
+
+public class MemberDao {
+  private Connection conn;
+
+  public MemberDao(Connection conn) {
+    this.conn = conn;
+  }
+
+  public boolean isLoginedDup(String loginId) {
+    SecSql sql = new SecSql();
+
+    sql.append("SELECT COUNT(*) > 0");
+    sql.append("FROM `member`");
+    sql.append("WHERE loginId = ?", loginId);
+
+    return DBUtil.selectRowBooleanValue(conn, sql);
+  }
+
+  public int join(String loginId, String loginPw, String name) {
+    SecSql sql = new SecSql();
+
+    sql.append("INSERT INTO `member`");
+    sql.append("SET regDate = NOW(),");
+    sql.append("updateDate = now(),");
+    sql.append("loginId = ?,", loginId);
+    sql.append("loginPw = ?,", loginPw);
+    sql.append("name = ?", name);
+
+    return DBUtil.insert(conn, sql);
+  }
+}

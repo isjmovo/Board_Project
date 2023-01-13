@@ -2,8 +2,6 @@ package com.isjmovo.exam.textboard;
 
 import com.isjmovo.exam.textboard.controller.ArticleController;
 import com.isjmovo.exam.textboard.controller.MemberController;
-import com.isjmovo.exam.textboard.util.DBUtil;
-import com.isjmovo.exam.textboard.util.SecSql;
 
 import java.sql.*;
 import java.util.*;
@@ -58,13 +56,8 @@ public class App {
   }
 
   private int action(Connection conn, Scanner sc, String cmd) {
-    MemberController memberController = new MemberController();
-    memberController.setConn(conn);
-    memberController.setScanner(sc);
-
-    ArticleController articleController = new ArticleController();
-    articleController.setConn(conn);
-    articleController.setScanner(sc);
+    MemberController memberController = new MemberController(conn, sc);
+    ArticleController articleController = new ArticleController(conn, sc);
 
     if (cmd.equals("member join")) {
       memberController.join(cmd);

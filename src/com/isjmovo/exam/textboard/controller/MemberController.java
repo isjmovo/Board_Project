@@ -1,9 +1,20 @@
 package com.isjmovo.exam.textboard.controller;
 
+import com.isjmovo.exam.textboard.service.MemberService;
 import com.isjmovo.exam.textboard.util.DBUtil;
 import com.isjmovo.exam.textboard.util.SecSql;
 
+import java.sql.Connection;
+import java.util.Scanner;
+
 public class MemberController extends Controller {
+  private MemberService memberService;
+
+  public MemberController(Connection conn, Scanner sc) {
+    super(sc);
+    memberService = new MemberService(conn);
+  }
+
   public void join(String cmd) {
     String loginId;
     String loginPw;
@@ -22,14 +33,9 @@ public class MemberController extends Controller {
         continue;
       }
 
-      SecSql sql = new SecSql();
-      sql.append("SELECT COUNT(*) > 0");
-      sql.append("FROM `member`");
-      sql.append("WHERE loginId = ?", loginId);
+      boolean isLoginedDup = memberService.isLoginedDup(loginId);
 
-      boolean loginedDup = DBUtil.selectRowBooleanValue(conn, sql);
-
-      if (loginedDup) {
+      if (isLoginedDup) {
         System.out.printf("%s(은)는 이미 사용 중인 아이디입니다.\n", loginId);
         continue;
       }
@@ -82,15 +88,8 @@ public class MemberController extends Controller {
       break;
     }
 
-    SecSql sql = new SecSql();
-    sql.append("INSERT INTO `member`");
-    sql.append("SET regDate = NOW(),");
-    sql.append("updateDate = now(),");
-    sql.append("loginId = ?,", loginId);
-    sql.append("loginPw = ?,", loginPw);
-    sql.append("name = ?", name);
+    int id = memberService.join(loginId, loginPw, name);
 
-    int id = DBUtil.insert(conn, sql);
     System.out.printf("%d번 회원이 생성되었습니다.\n", id);
   }
 }
