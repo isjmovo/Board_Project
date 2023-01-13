@@ -1,6 +1,6 @@
 package com.isjmovo.exam.textboard.service;
 
-import com.isjmovo.exam.textboard.Article;
+import com.isjmovo.exam.textboard.dto.Article;
 import com.isjmovo.exam.textboard.dao.ArticleDao;
 
 import java.sql.Connection;

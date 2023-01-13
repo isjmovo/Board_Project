@@ -1,4 +1,4 @@
-package com.isjmovo.exam.textboard;
+package com.isjmovo.exam.textboard.dto;
 
 import java.util.Map;
 

@@ -1,6 +1,6 @@
 package com.isjmovo.exam.textboard.dao;
 
-import com.isjmovo.exam.textboard.Article;
+import com.isjmovo.exam.textboard.dto.Article;
 import com.isjmovo.exam.textboard.util.DBUtil;
 import com.isjmovo.exam.textboard.util.SecSql;
 

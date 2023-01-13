@@ -1,6 +1,6 @@
 package com.isjmovo.exam.textboard.test;
 
-import com.isjmovo.exam.textboard.Article;
+import com.isjmovo.exam.textboard.dto.Article;
 
 import java.sql.*;
 import java.util.ArrayList;

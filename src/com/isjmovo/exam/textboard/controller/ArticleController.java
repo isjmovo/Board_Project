@@ -1,15 +1,10 @@
 package com.isjmovo.exam.textboard.controller;
 
-import com.isjmovo.exam.textboard.Article;
+import com.isjmovo.exam.textboard.dto.Article;
 import com.isjmovo.exam.textboard.service.ArticleService;
-import com.isjmovo.exam.textboard.service.MemberService;
-import com.isjmovo.exam.textboard.util.DBUtil;
-import com.isjmovo.exam.textboard.util.SecSql;
 
 import java.sql.Connection;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.Scanner;
 
 public class ArticleController extends Controller {
