@@ -1,17 +1,14 @@
 package com.isjmovo.exam.textboard.service;
 
+import com.isjmovo.exam.textboard.Container;
 import com.isjmovo.exam.textboard.dao.MemberDao;
 import com.isjmovo.exam.textboard.dto.Member;
-import com.isjmovo.exam.textboard.util.DBUtil;
-import com.isjmovo.exam.textboard.util.SecSql;
-
-import java.sql.Connection;
 
 public class MemberService {
   private MemberDao memberDao;
 
-  public MemberService(Connection conn) {
-    memberDao = new MemberDao(conn);
+  public MemberService() {
+    memberDao = Container.memberDao;
   }
 
   public boolean isLoginedDup(String loginId) {

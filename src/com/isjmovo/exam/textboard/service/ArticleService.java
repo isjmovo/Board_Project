@@ -1,16 +1,16 @@
 package com.isjmovo.exam.textboard.service;
 
+import com.isjmovo.exam.textboard.Container;
 import com.isjmovo.exam.textboard.dto.Article;
 import com.isjmovo.exam.textboard.dao.ArticleDao;
 
-import java.sql.Connection;
 import java.util.List;
 
 public class ArticleService {
   private ArticleDao articleDao;
 
-  public ArticleService(Connection conn) {
-    articleDao = new ArticleDao(conn);
+  public ArticleService() {
+    articleDao = Container.articleDao;
   }
 
   public int add(String title, String body) {

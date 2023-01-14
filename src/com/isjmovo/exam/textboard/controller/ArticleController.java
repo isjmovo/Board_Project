@@ -1,18 +1,16 @@
 package com.isjmovo.exam.textboard.controller;
 
+import com.isjmovo.exam.textboard.Container;
 import com.isjmovo.exam.textboard.dto.Article;
 import com.isjmovo.exam.textboard.service.ArticleService;
 
-import java.sql.Connection;
 import java.util.List;
-import java.util.Scanner;
 
 public class ArticleController extends Controller {
   private ArticleService articleService;
 
-  public ArticleController(Connection conn, Scanner sc) {
-    super(sc);
-    articleService = new ArticleService(conn);
+  public ArticleController() {
+    articleService = Container.articleService;
   }
 
   public void add(String cmd) {

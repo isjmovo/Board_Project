@@ -1,18 +1,17 @@
 package com.isjmovo.exam.textboard;
 
-import com.isjmovo.exam.textboard.controller.ArticleController;
-import com.isjmovo.exam.textboard.controller.MemberController;
-
 import java.sql.*;
 import java.util.*;
 
 public class App {
   public void run() {
-    Scanner sc = Cantainer.scanner;
+    Scanner sc = Container.scanner;
+    Container.scanner = new Scanner(System.in);
+    Container.init();
 
     while (true) {
       System.out.printf("명령어) ");
-      String cmd = sc.nextLine();
+      String cmd = Container.scanner.nextLine();
       cmd = cmd.trim();
 
       // DB 연결 시작
@@ -31,8 +30,10 @@ public class App {
       try {
         conn = DriverManager.getConnection(url, "isjmovo", "Kim123");
 
+        Container.conn = conn;
+
         // 핵심 로직
-        int actionResult = action(conn, sc, cmd);
+        int actionResult = action(cmd);
 
         if (actionResult == -1) {
           break;
@@ -52,27 +53,25 @@ public class App {
       }
       // DB 연결 끝
     }
-    sc.close();
+    Container.scanner.close();
   }
 
-  private int action(Connection conn, Scanner sc, String cmd) {
-    MemberController memberController = new MemberController(conn, sc);
-    ArticleController articleController = new ArticleController(conn, sc);
+  private int action(String cmd) {
 
     if (cmd.equals("member join")) {
-      memberController.join(cmd);
+      Container.memberController.join(cmd);
     } else if (cmd.equals("member login")) {
-      memberController.login(cmd);
+      Container.memberController.login(cmd);
     } else if (cmd.equals("article add")) {
-      articleController.add(cmd);
+      Container.articleController.add(cmd);
     } else if (cmd.equals("article list")) {
-      articleController.showList(cmd);
+      Container.articleController.showList(cmd);
     } else if (cmd.startsWith("article detail ")) {
-      articleController.showDetail(cmd);
+      Container.articleController.showDetail(cmd);
     } else if (cmd.startsWith("article modify ")) {
-      articleController.modify(cmd);
+      Container.articleController.modify(cmd);
     } else if (cmd.startsWith("article delete ")) {
-      articleController.delete(cmd);
+      Container.articleController.delete(cmd);
     } else if (cmd.equals("system exit")) {
       System.out.println("시스템 종료");
       System.exit(0);

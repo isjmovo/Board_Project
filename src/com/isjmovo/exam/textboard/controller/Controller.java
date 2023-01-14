@@ -1,13 +1,12 @@
 package com.isjmovo.exam.textboard.controller;
 
-import java.sql.Connection;
+import com.isjmovo.exam.textboard.Container;
 import java.util.Scanner;
 
 public abstract class Controller {
-  protected Connection conn;
   protected Scanner sc;
 
-  public Controller(Scanner sc) {
-    this.sc = sc;
+  public Controller() {
+    this.sc = Container.scanner;
   }
 }

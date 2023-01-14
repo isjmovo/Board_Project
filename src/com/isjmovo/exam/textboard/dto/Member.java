@@ -24,4 +24,3 @@ public class Member {
     return String.format("{id : %d, regDate: %s, updateDate: %s, loginId : \"%s\", loginPw : \"%s\", name : \"%s\"}", id, regDate, updateDate, loginId, loginPw, name);
   }
 }
-

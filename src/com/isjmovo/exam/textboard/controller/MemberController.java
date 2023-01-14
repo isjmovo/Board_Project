@@ -1,17 +1,14 @@
 package com.isjmovo.exam.textboard.controller;
 
+import com.isjmovo.exam.textboard.Container;
 import com.isjmovo.exam.textboard.dto.Member;
 import com.isjmovo.exam.textboard.service.MemberService;
-
-import java.sql.Connection;
-import java.util.Scanner;
 
 public class MemberController extends Controller {
   private MemberService memberService;
 
-  public MemberController(Connection conn, Scanner sc) {
-    super(sc);
-    memberService = new MemberService(conn);
+  public MemberController() {
+    memberService = Container.memberService;
   }
 
   public void join(String cmd) {
