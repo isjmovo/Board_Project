@@ -51,6 +51,8 @@ public class ArticleController extends Controller {
   public void showDetail(String cmd) {
     int id = Integer.parseInt(cmd.split(" ")[2]);
 
+    articleService.increaseHit(id);
+
     Article article = articleService.getArticleById(id);
 
     if (article == null) {
@@ -59,8 +61,10 @@ public class ArticleController extends Controller {
     }
 
     System.out.printf("== %d번 게시물 상세보기 ==\n", article.id);
-    System.out.printf("현재 날짜 : %s\n", article.regDate);
+    System.out.printf("등록 날짜 : %s\n", article.regDate);
     System.out.printf("수정 날짜 : %s\n", article.updateDate);
+    System.out.printf("작성자 : %s\n", article.extra__writerName);
+    System.out.printf("조회수 : %d\n", article.hit);
     System.out.printf("제목 : %s\n", article.title);
     System.out.printf("내용 : %s\n", article.body);
   }

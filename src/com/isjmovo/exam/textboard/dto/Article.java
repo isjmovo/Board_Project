@@ -7,6 +7,7 @@ public class Article {
   public String regDate;
   public String updateDate;
   public int memberId;
+  public int hit;
   public String title;
   public String body;
   public String extra__writerName;
@@ -16,6 +17,7 @@ public class Article {
     this.regDate = (String) articleMap.get("regDate");
     this.updateDate = (String) articleMap.get("updateDate");
     this.memberId = (int) articleMap.get("memberId");
+    this.hit = (int) articleMap.get("hit");
     this.title = (String) articleMap.get("title");
     this.body = (String) articleMap.get("body");
 
@@ -26,6 +28,6 @@ public class Article {
 
   @Override
   public String toString() {
-    return String.format("{id : %d, regDate: %s, updateDate: %s, memberId = %s, title : %s, body : %s}", id, regDate, updateDate, memberId, title, body);
+    return String.format("{id : %d, regDate: %s, updateDate: %s, memberId : %s, hit : %d, title : %s, body : %s}", id, regDate, updateDate, memberId, hit, title, body);
   }
 }
