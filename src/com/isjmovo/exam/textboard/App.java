@@ -62,6 +62,8 @@ public class App {
       Container.memberController.join(cmd);
     } else if (cmd.equals("member login")) {
       Container.memberController.login(cmd);
+    } else if (cmd.equals("member whoami")) {
+      Container.memberController.whoami(cmd);
     } else if (cmd.equals("article add")) {
       Container.articleController.add(cmd);
     } else if (cmd.equals("article list")) {
