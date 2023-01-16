@@ -53,3 +53,10 @@ WHERE loginId = loginId;
 
 # 게시물 테이블에 멤버 ID Column 추가
 ALTER TABLE article ADD COLUMN memberId INT(10) UNSIGNED NOT NULL AFTER updateDate;
+
+# 게시물 테이블과 멤버 테이블 조인
+SELECT A.*, M.name AS extra__writerName
+FROM article AS A
+INNER JOIN MEMBER AS M
+ON A.memberId = M.id
+ORDER BY id DESC;
