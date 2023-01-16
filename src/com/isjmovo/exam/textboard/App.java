@@ -59,11 +59,13 @@ public class App {
   private int action(String cmd) {
 
     if (cmd.equals("member join")) {
-      Container.memberController.join(cmd);
+      Container.memberController.join();
     } else if (cmd.equals("member login")) {
-      Container.memberController.login(cmd);
+      Container.memberController.login();
+    } else if (cmd.equals("member logout")) {
+      Container.memberController.logout();
     } else if (cmd.equals("member whoami")) {
-      Container.memberController.whoami(cmd);
+      Container.memberController.whoami();
     } else if (cmd.equals("article add")) {
       Container.articleController.add(cmd);
     } else if (cmd.equals("article list")) {
