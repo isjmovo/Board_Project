@@ -50,3 +50,6 @@ loginPw = CONCAT('user', RAND()),
 SELECT COUNT(*) > 0
 FROM `member`
 WHERE loginId = loginId;
+
+# 게시물 테이블에 멤버 ID Column 추가
+ALTER TABLE article ADD COLUMN memberId INT(10) UNSIGNED NOT NULL AFTER updateDate;
