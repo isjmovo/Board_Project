@@ -62,4 +62,4 @@ ON A.memberId = M.id
 ORDER BY id DESC;
 
 # 게시물 테이블에 조회수 Column 추가
-ALTER TABLE article ADD COLUMN hit INT UNSIGNED NOT NULL AFTER memberId;
+ALTER TABLE article ADD COLUMN hit INT(10) UNSIGNED NOT NULL AFTER memberId;
